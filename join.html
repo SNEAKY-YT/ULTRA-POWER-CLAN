@@ -1,0 +1,399 @@
+<!DOCTYPE html>  <html lang="ar" dir="rtl">  
+<head>  
+<meta charset="UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1" />  
+<title>واجهة الانضمام - ULTRA POWER CLAN</title>  
+<style>  
+  body {  
+    background: #1a0000 url('https://i.postimg.cc/P5Z60LM9/Picsart-25-04-20-22-49-28-961.jpg') no-repeat center center fixed;  
+    background-size: cover;  
+    color: white;  
+    font-family: 'Tajawal', Arial, sans-serif;  
+    margin: 0; padding: 0;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    min-height: 100vh;  
+  }  
+  .logo {  
+    margin-top: 40px;  
+  }  
+  .logo img {  
+    width: 140px;  
+    border-radius: 50%;  
+    box-shadow: 0 0 20px rgba(255,69,0,0.7);  
+  }  
+  h1 {  
+    margin: 15px 0 15px 0;  
+    font-size: 2.4em;  
+    letter-spacing: 3px;  
+    text-shadow: 0 0 10px rgba(255,69,0,0.8);  
+    user-select: none;  
+  }  
+  .upc-btn, .join-btn {  
+    position: relative;  
+    background: linear-gradient(90deg, #ff4500, #ff0000);  
+    border: none;  
+    padding: 12px 30px;  
+    border-radius: 25px;  
+    font-size: 1.2em;  
+    cursor: pointer;  
+    color: white;  
+    box-shadow: 0 0 15px rgba(255,69,0,0.9);  
+    margin-bottom: 10px;  
+    user-select: none;  
+    transition: background 0.3s;  
+  }  
+  .upc-btn:hover, .join-btn:hover {  
+    background: linear-gradient(90deg, #ff6347, #ff1100);  
+  }  
+  /* السحابة المؤقتة */  
+  .tooltip {  
+    position: absolute;  
+    top: -60px;  
+    right: 50%;  
+    transform: translateX(50%);  
+    background: #ffffff;  
+    padding: 8px 15px;  
+    border-radius: 15px;  
+    font-size: 0.9em;  
+    color: #000000;  
+    white-space: nowrap;  
+    box-shadow: 0 0 15px rgba(255,69,0,0.9);  
+    opacity: 1; /* تظهر تلقائياً */  
+    pointer-events: auto;  
+    transition: opacity 0.3s ease;  
+    user-select: none;  
+  }  
+  .tooltip.hide {  
+    opacity: 0;  
+    pointer-events: none;  
+  }  .questions-list {
+max-width: 380px;
+width: 90vw;
+background: rgba(26,0,0,0.85);
+border-radius: 15px;
+box-shadow: 0 0 25px rgba(255,69,0,0.8);
+padding: 15px 20px;
+display: none;
+flex-direction: column;
+gap: 12px;
+user-select: none;
+}
+.questions-list button {
+background: transparent;
+border: 2px solid #ffba55;
+color: #ffba55;
+padding: 10px 15px;
+font-size: 1em;
+border-radius: 12px;
+cursor: pointer;
+text-align: right;
+transition: background 0.3s, color 0.3s;
+}
+.questions-list button:hover {
+background: #ffba55;
+color: black;
+}
+.answer-box {
+max-width: 380px;
+width: 90vw;
+min-height: 100px;
+background: rgba(26,0,0,0.85);
+margin-top: 25px;
+border-radius: 15px;
+padding: 15px 20px;
+box-shadow: 0 0 25px rgba(255,69,0,0.8);
+font-size: 1.1em;
+white-space: normal;
+user-select: text;
+position: relative;
+overflow-wrap: break-word;
+word-wrap: break-word;
+word-break: break-word;
+max-height: 300px;
+overflow-y: auto;
+display: none; /* مخفي بشكل افتراضي */
+}
+.answer-box ul {
+padding-left: 20px;
+margin: 0;
+}
+.answer-box li {
+margin-bottom: 8px;
+}
+.loading-dots {
+display: inline-block;
+width: 30px;
+text-align: left;
+vertical-align: bottom;
+}
+.dot {
+display: inline-block;
+width: 7px;
+height: 7px;
+margin: 0 3px;
+background: #ffba55;
+border-radius: 50%;
+opacity: 0.3;
+animation-name: blink;
+animation-duration: 1.4s;
+animation-iteration-count: infinite;
+animation-timing-function: linear;
+}
+.dot:nth-child(1) {
+animation-delay: 0s;
+}
+.dot:nth-child(2) {
+animation-delay: 0.2s;
+}
+.dot:nth-child(3) {
+animation-delay: 0.4s;
+}
+@keyframes blink {
+0%, 80%, 100% {
+opacity: 0.3;
+}
+40% {
+opacity: 1;
+}
+}
+
+/* نموذج الانضمام */
+#joinFormContainer {
+background: rgba(26,0,0,0.85);
+max-width: 400px;
+width: 90vw;
+margin-top: 30px;
+border-radius: 15px;
+box-shadow: 0 0 25px rgba(255,69,0,0.8);
+padding: 20px 25px;
+font-family: Arial, sans-serif;
+color: white;
+user-select: none;
+display: none;
+}
+#joinFormContainer h2 {
+margin-top: 0;
+text-align: center;
+}
+#joinForm label {
+display: block;
+margin: 10px 0 5px 0;
+}
+#joinForm input, #joinForm textarea {
+width: 100%;
+padding: 8px;
+border-radius: 8px;
+border: none;
+outline: none;
+font-size: 1em;
+box-sizing: border-box;
+}
+#joinForm textarea {
+resize: vertical;
+}
+#joinForm input:invalid, #joinForm textarea:invalid {
+border: 2px solid #ff4500;
+}
+#joinForm input:focus, #joinForm textarea:focus {
+border: 2px solid #ffba55;
+background: rgba(255,186,85,0.1);
+}
+#joinForm button[type="submit"] {
+margin-top: 15px;
+background: #ff4500;
+color: white;
+padding: 12px 25px;
+border: none;
+border-radius: 12px;
+cursor: pointer;
+font-size: 1.1em;
+box-shadow: 0 0 15px rgba(255,69,0,0.9);
+transition: background 0.3s;
+}
+#joinForm button[type="submit"]:hover {
+background: #ff6347;
+}
+#agreeLabel {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-top: 10px;
+font-size: 0.95em;
+}
+#agreeLabel input {
+width: auto;
+margin: 0;
+cursor: pointer;
+}
+#formError {
+color: #ffba55;
+margin-top: 10px;
+font-weight: bold;
+display: none;
+}
+
+footer {
+margin-top: auto;
+margin-bottom: 15px;
+color: #ccc;
+font-size: 0.9em;
+user-select: none;
+}
+</style>
+
+</head>  
+<body>  <div class="logo">  
+  <img src="https://i.postimg.cc/xTQfPXjy/file-0000000093d061f7a6747973d7a302f1-conversation-id-67f90571-1e68-8006-8b60-f47b24da0069-message-i.png" alt="Clan Logo">  
+</div>  
+<h1>ULTRA POWER CLAN</h1>  <button class="upc-btn" id="upcBtn" aria-expanded="false">UPC AI
+
+  <div class="tooltip" id="tooltip">استخدم الذكاء الاصطناعي الخاص بنا للرد على اسئلتك</div>  
+</button>  <div class="questions-list" id="questionsList">  
+  <button onclick="selectQuestion(0)">قروب الاختبار للكلان</button>  
+  <button onclick="selectQuestion(1)">شروط الانضمام للكلان</button>  
+  <button onclick="selectQuestion(2)">متى يتم الرد علي ؟</button>  
+</div>  <div class="answer-box" id="answerBox" aria-live="polite" aria-atomic="true"></div>  <button class="join-btn" id="joinBtn">طلب الانضمام إلى الكلان</button>
+
+<div id="joinFormContainer">  
+  <h2>طلب الانضمام إلى ULTRA POWER CLAN</h2>  
+  <form id="joinForm" onsubmit="sendWhatsApp(event)">  
+    <label>الاسم في اللعبة:</label><br>  
+    <input type="text" id="gameName" required autocomplete="off" style="width:100%; padding:8px; margin:6px 0;"><br>  <label>المعرف (ID):</label><br>  
+<input type="text" id="gameID" required autocomplete="off" style="width:100%; padding:8px; margin:6px 0;"><br>  
+  
+<label>المستوى الحالي:</label><br>  
+<input type="text" id="level" autocomplete="off" style="width:100%; padding:8px; margin:6px 0;"><br>  
+  
+<label>رقم التواصل (واتساب):</label><br>  
+<input type="text" id="contact" required autocomplete="off" style="width:100%; padding:8px; margin:6px 0;"><br>  
+  
+<label>ملاحظات إضافية:</label><br>  
+<textarea id="notes" rows="3" autocomplete="off" style="width:100%; padding:8px; margin:6px 0;"></textarea><br>  
+  
+<label id="agreeLabel"><input type="checkbox" id="agree" required> أقرّ بموافقتي على جميع شروط الانضمام إلى الكلان.</label><br><br>  
+  
+<button type="submit" style="background:#ff4500; color:white; padding:12px 25px; border:none; border-radius:8px; cursor:pointer; font-size:1.1em;">إرسال الطلب عبر واتساب</button>
+
+  </form>  
+</div>  <footer>جميع الحقوق محفوظة لـ SNEAKY</footer>  <script>  
+  const upcBtn = document.getElementById('upcBtn');  
+  const tooltip = document.getElementById('tooltip');  
+  const questionsList = document.getElementById('questionsList');  
+  const answerBox = document.getElementById('answerBox');  
+  const joinBtn = document.getElementById('joinBtn');  
+  const joinFormContainer = document.getElementById('joinFormContainer');  
+  
+  const questions = [  
+    {  
+      question: "قروب الاختبار للكلان",  
+      answer: [  
+        "بالتأكيد ! اليك قروب اختبارات الكلان الخاص ب ULTRA POWER CLAN",  
+        "الرابط 👇🏻",  
+        "https://chat.whatsapp.com/Goxkgel3e4oHU6UL5N9NdL?mode=ac_t"  
+      ]  
+    },  
+    {  
+      question: "شروط الانضمام للكلان",  
+      answer: [  
+        "🔥 شروط الانضمام إلى كلان ULTRA POWER CLAN (个UP):",  
+        "1. 🏷️ وضع شعار الكلان (个UP) بجانب الاسم.",  
+        "2. ⚔️ الالتزام بحروب الرابطة والرومات.",  
+        "3. 👑 احترام الزعماء وعدم الجدال معهم.",  
+        "4. 🎯 لفل 60+ (حسب مستواك في اللعب).",  
+        "5. 📢 اتباع أوامر الزعماء وتنفيذها.",  
+        "6. 🚫 ممنوع السب أو الإهانة داخل القروب أو في اللعبة.",  
+        "إذا كنت تستوفي هذه الشروط، نرحب بانضمامك إلى عائلتنا القتالية!"  
+      ]  
+    },  
+    {  
+      question: "متى يتم الرد علي ؟",  
+      answer: [  
+        "طلبك قيد المراجعة وفي العادة ممكن يستغرق يومين أو أقل."  
+      ]  
+    }  
+  ];  
+  
+  // السحابة تظهر تلقائياً عند تحميل الصفحة  
+  window.addEventListener('load', () => {  
+    tooltip.classList.remove('hide');  
+  });  
+  
+  // عند الضغط على زر UPC AI  
+  upcBtn.addEventListener('click', () => {  
+    const expanded = upcBtn.getAttribute('aria-expanded') === 'true';  
+    if (expanded) {  
+      questionsList.style.display = 'none';  
+      answerBox.style.display = 'none';  
+      answerBox.innerHTML = '';  
+      upcBtn.setAttribute('aria-expanded', 'false');  
+      tooltip.classList.remove('hide'); // السحابة تظهر  
+    } else {  
+      questionsList.style.display = 'flex';  
+      upcBtn.setAttribute('aria-expanded', 'true');  
+      tooltip.classList.add('hide'); // السحابة تخفى  
+    }  
+  });  
+  
+  joinBtn.addEventListener('click', () => {  
+    if(joinFormContainer.style.display === 'block') {  
+      joinFormContainer.style.display = 'none';  
+    } else {  
+      joinFormContainer.style.display = 'block';  
+      // إخفاء الأسئلة والرد عند فتح النموذج  
+      questionsList.style.display = 'none';  
+      answerBox.style.display = 'none';  
+      answerBox.innerHTML = '';  
+      upcBtn.setAttribute('aria-expanded', 'false');  
+      tooltip.classList.remove('hide'); // السحابة تظهر مع إخفاء القائمة  
+    }  
+  });  
+  
+  function selectQuestion(index) {  
+    answerBox.innerHTML = '';  
+    answerBox.style.display = 'block';  
+    const loading = document.createElement('div');  
+    loading.classList.add('loading-dots');  
+    loading.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';  
+    answerBox.appendChild(loading);  
+  
+    // محاكاة تأخير الرد  
+    setTimeout(() => {  
+      const ans = questions[index].answer;  
+      answerBox.innerHTML = '<ul>' + ans.map(line => `<li>${line}</li>`).join('') + '</ul>';  
+    }, 1400);  
+  }  
+  
+  function sendWhatsApp(e) {  
+    e.preventDefault();  
+    const name = encodeURIComponent(document.getElementById('gameName').value.trim());  
+    const id = encodeURIComponent(document.getElementById('gameID').value.trim());  
+    const level = encodeURIComponent(document.getElementById('level').value.trim() || 'غير محدد');  
+    const contact = encodeURIComponent(document.getElementById('contact').value.trim());  
+    const notes = encodeURIComponent(document.getElementById('notes').value.trim() || 'لا توجد');  
+    const agree = document.getElementById('agree').checked;  
+  
+    if(!agree) {  
+      alert('يرجى الموافقة على شروط الانضمام.');  
+      return;  
+    }  
+    if(!name || !id || !contact) {  
+      alert('يرجى ملء الحقول المطلوبة.');  
+      return;  
+    }  
+  
+    const message = `مرحبًا فريق ULTRA POWER CLAN,%0A%0A` +  
+      `أرغب بالتقدم بطلب انضمام إلى الكلان، وأرفق لكم بياناتي:%0A%0A` +  
+      `📛 الاسم في اللعبة: ${name}%0A` +  
+      `🆔 المعرف (ID): ${id}%0A` +  
+      `🎮 المستوى الحالي: ${level}%0A` +  
+      `📞 رقم التواصل (واتساب): ${contact}%0A` +  
+      `📝 ملاحظات إضافية: ${notes}%0A%0A` +  
+      `✅ أقرّ بموافقتي على جميع شروط الانضمام إلى الكلان.`;  
+  
+    const whatsappURL = `https://wa.me/201116323477?text=${message}`;  
+    window.open(whatsappURL, '_blank');  
+  }  
+</script>  </body>  
+</html>

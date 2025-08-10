@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>مرحبا بك</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      overflow: hidden;
+      transition: background 1s ease;
+    }
+
+    .container {
+      text-align: center;
+      color: white;
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+      animation: fadeInUp 1.5s ease;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1.1em;
+      background: #f39c12;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #e67e22;
+      transform: scale(1.05);
+    }
+
+    .second-screen {
+      display: none;
+      text-align: center;
+      animation: slideIn 1s forwards;
+    }
+
+    .second-screen h1 {
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+
+    .second-screen p {
+      font-size: 1.1em;
+      margin-bottom: 25px;
+    }
+
+    .footer {
+      font-size: 0.9em;
+      color: #eee;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="firstScreen">
+    <h1>السلام عليكم</h1>
+    <button onclick="showSecondScreen()">انقر هنا</button>
+  </div>
+
+  <div class="container second-screen" id="secondScreen">
+    <h1>لا تنسى الصلاة على النبي ﷺ</h1>
+    <p>اللهم صلِّ وسلم وبارك وأنعم على نبينا محمد</p>
+    <div class="footer">جميع الحقوق محفوظة لعصام ساتي</div>
+  </div>
+
+  <script>
+    function showSecondScreen() {
+      document.getElementById("firstScreen").style.display = "none";
+      document.body.style.background = "linear-gradient(135deg, #16a085, #27ae60)";
+      document.getElementById("secondScreen").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
